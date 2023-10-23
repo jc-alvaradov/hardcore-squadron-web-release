@@ -8,7 +8,7 @@ class CORSRequestHandler(SimpleHTTPRequestHandler):
         self.send_header('Cross-Origin-Opener-Policy', 'same-origin')
         return super().end_headers()
 
-PORT = 8000
+PORT = 80
 
 with socketserver.TCPServer(("", PORT), CORSRequestHandler) as httpd:
     print(f"Serving at port {PORT}")
