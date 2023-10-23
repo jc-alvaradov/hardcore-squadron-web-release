@@ -1,15 +1,9 @@
-import http.server
-from http.server import SimpleHTTPRequestHandler
-import socketserver
+from flask import Flask
+from flask_cors import CORS
 
-class CORSRequestHandler(SimpleHTTPRequestHandler):
-    def end_headers(self):
-        self.send_header('Cross-Origin-Embedder-Policy', 'require-corp')
-        self.send_header('Cross-Origin-Opener-Policy', 'same-origin')
-        return super().end_headers()
+app = Flask(__name__)
+CORS(app)
 
-PORT = 80
-
-with socketserver.TCPServer(("", PORT), CORSRequestHandler) as httpd:
-    print(f"Serving at port {PORT}")
-    httpd.serve_forever()
+@app.route('/')
+def game():
+    return render_template('index.html')
